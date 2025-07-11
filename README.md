@@ -1,2 +1,2 @@
 # LangChain-ThreatDetector
-Threat Detector is a chat/textual threat analysis tool built using LangChain
+Threat Detector is a chat/textual threat analysis tool built using LangChain (currently a WIP project)
