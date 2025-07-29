@@ -1,26 +1,15 @@
 from langchain_core.messages import SystemMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnableSequence
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import json
 
-
-class ThreatAnalysis:
-    def __init__(
-        self, emotions: list[str], num_negative_sentiments: int, danger_words: list[str]
-    ):
-        self.emotions = emotions
-        self.danger_words = danger_words
-        self.negative_sentiments = num_negative_sentiments
-
-    def get_negative_sentiments(self) -> int:
-        return self.negative_sentiments
-
-    def get_emotions(self) -> list[str]:
-        return self.emotions
-
-    def get_danger_words(self) -> list[str]:
-        return self.danger_words
+from models import (
+    ThreatAnalysisResponse,
+    DangerExtractionResponse,
+    SentimentAnalysisResponse,
+)
 
 
 class ThreatAnalyzer:
@@ -76,12 +65,12 @@ class ThreatAnalyzer:
             model_kwargs={"response_format": {"type": "json_object"}},
         )
 
-        self.sentiment_pipeline = (
+        self.sentiment_pipeline: RunnableSequence = (
             ThreatAnalyzer.__templates["sentiment_analysis"]
             | self.sentiment_analysis_model
             | ThreatAnalyzer.__parse_json_response
         )
-        self.extraction_pipeline = (
+        self.extraction_pipeline: RunnableSequence = (
             ThreatAnalyzer.__templates["action_extraction"]
             | self.feature_extraction_model
             | ThreatAnalyzer.__parse_json_response
@@ -91,7 +80,7 @@ class ThreatAnalyzer:
             | ThreatAnalyzer.__parse_json_response
         )
 
-    def perform_analysis(self, text: str) -> ThreatAnalysis:
+    def full_analysis(self, text: str) -> ThreatAnalysisResponse:
         sentiment_analysis = self.sentiment_pipeline.invoke({"input": text})
         danger_extraction = self.extraction_pipeline.invoke({"input": text})
 
@@ -100,11 +89,19 @@ class ThreatAnalyzer:
             if emotion[1] == "negative":
                 negative_sentiments += 1
 
-        return ThreatAnalysis(
-            emotions=[emotion[0] for emotion in sentiment_analysis["sentiments"]],
-            num_negative_sentiments=negative_sentiments,
+        return ThreatAnalysisResponse(
+            negative_sentiments=negative_sentiments,
+            emotions=sentiment_analysis["sentiments"],
             danger_words=danger_extraction["danger_words"],
         )
+
+    def sentiment_analysis(self, text: str) -> SentimentAnalysisResponse:
+        response = self.sentiment_pipeline.invoke({"input": text})
+        return SentimentAnalysisResponse(sentiments=response["sentiments"])
+
+    def danger_word_extraction(self, text: str) -> DangerExtractionResponse:
+        response = self.extraction_pipeline.invoke({"input": text})
+        return DangerExtractionResponse(danger_words=response["danger_words"])
 
     def __parse_json_response(response: AIMessage) -> dict:
         try:

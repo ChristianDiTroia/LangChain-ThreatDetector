@@ -1,36 +1,33 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 from ThreatAnalyzer import ThreatAnalyzer
+from models import *
 
 threat_analyzer = ThreatAnalyzer()
 app = FastAPI()
 
 
-class ThreatDetectionRequest(BaseModel):
-    text: str
-
-
-class ThreatDetectionResponse(BaseModel):
-    negative_sentiments: int
-    emotions: list[str]
-    danger_words: list[str]
-
-
 @app.get("/")
 async def root():
     return {
-        "message": "Welcome to the Threat Detector API. Post to /detect-threat with {text: str } to analyze text."
+        "message": "Welcome to the Threat Detector API. Post to /detect-threat with body {text: str } to analyze text."
     }
 
 
-@app.post("/detect-threat")
-async def detect_threat(data: ThreatDetectionRequest) -> ThreatDetectionResponse:
-    analysis = threat_analyzer.perform_analysis(data.text)
+@app.post("/threat-analysis", response_model=ThreatAnalysisResponse)
+async def detect_threat(data: ThreatDetectionRequest) -> ThreatAnalysisResponse:
+    response = threat_analyzer.full_analysis(data.text)
+    return response
 
-    response = ThreatDetectionResponse(
-        negative_sentiments=analysis.get_negative_sentiments(),
-        emotions=analysis.get_emotions(),
-        danger_words=analysis.get_danger_words(),
-    )
 
+@app.post("/sentiment-analysis", response_model=SentimentAnalysisResponse)
+async def sentiment_analysis(data: ThreatDetectionRequest) -> SentimentAnalysisResponse:
+    response = threat_analyzer.sentiment_analysis(data.text)
+    return response
+
+
+@app.post("/danger-word-extraction", response_model=DangerExtractionResponse)
+async def danger_word_extraction(
+    data: ThreatDetectionRequest,
+) -> DangerExtractionResponse:
+    response = threat_analyzer.danger_word_extraction(data.text)
     return response
