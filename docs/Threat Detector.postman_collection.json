@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "ee32d277-e7d2-4a2d-bc13-f52f415db88d",
+		"name": "Threat Detector",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16099524"
+	},
+	"item": [
+		{
+			"name": "Threat analysis",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"I don't know how much longer I can put up with Alex's attitude. If he keeps pushing me, something might happen that he'll regret. People say I should just ignore him, but it's getting harder every day. Maybe he'll finally understand if things get a little more serious.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/threat-analysis",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"threat-analysis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sentiment analysis",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"Even though its fun, sometimes this game makes me so frustrated that I just want to throw my controller at the wall!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/sentiment-analysis",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"sentiment-analysis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Danger word extraction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"This homework is so difficult it makes me want to jump off my roof! If this gets any harder I might just do it.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/danger-word-extraction",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"danger-word-extraction"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
