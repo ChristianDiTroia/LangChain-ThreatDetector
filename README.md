@@ -2,7 +2,7 @@
 Threat Detector is a chat/textual threat analysis api built using LangChain, Groq API, and FastAPI (currently a WIP project)
 
 This project leverages LLMs hosted on the Groq API to analyze the level of danger/threat posed in a given string of text.
-For example, "you're killin me here" contains a dangerous phrase but is unlikely to actually be a threat. Threat detector aims to help distinguish between this kind of ambiguity, providing helpful information on what the intent behind the message really was and ultimately giving a rating on how suspicious/dangerous it is.
+For example, the phrase "you're killin me here" contains a violent word but is unlikely to actually be a threat. Threat detector aims to help distinguish between this kind of ambiguity, providing helpful information about true the intent behind the message that can be used to determine how suspicious/dangerous it is.
 
 ## Usage
 
