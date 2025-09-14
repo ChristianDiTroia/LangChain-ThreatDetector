@@ -52,7 +52,7 @@ class ThreatAnalyzer:
     def __init__(
         self,
         sentiment_analysis_groq_model="llama-3.3-70b-versatile",
-        feature_extraction_groq_model="gemma2-9b-it",
+        feature_extraction_groq_model="llama-3.3-70b-versatile",
     ):
         load_dotenv()
 

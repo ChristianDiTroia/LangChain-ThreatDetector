@@ -4,3 +4,11 @@ __pycache__/
 
 # Other
 .env
+.DS_Store
+
+# React Router
+/.react-router/
+/build/
+
+# Node
+/node_modules/
