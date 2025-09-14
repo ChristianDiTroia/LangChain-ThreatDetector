@@ -1,4 +1,5 @@
 # LangChain-ThreatDetector
+
 Threat Detector is a chat/textual threat analysis api built using LangChain, Groq API, and FastAPI (currently a WIP project)
 
 This project leverages LLMs hosted on the Groq API to analyze the level of danger/threat posed in a given string of text.
@@ -6,16 +7,17 @@ For example, the phrase "you're killin me here" contains a violent word but is u
 
 ## Usage
 
-Start the development server on default host port 8000: ```fastapi dev main.py```
+Start the development server on default host port 8000: `fastapi dev main.py`
 
 ### Endpoints
-```POST /threat-analysis```
 
-```POST /sentiment-analysis```
+`POST /threat-analysis`
 
-```POST /danger-word-extraction```
+`POST /sentiment-analysis`
 
-Request body format: ```{"text": "text to be analyzed here"}```
+`POST /danger-word-extraction`
+
+Request body format: `{"text": "text to be analyzed here"}`
 
 ## Postman Examples
 
