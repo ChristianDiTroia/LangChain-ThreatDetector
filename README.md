@@ -1,4 +1,4 @@
-# LangChain-ThreatDetector
+# ThreatDetector
 
 Threat Detector is a chat/textual threat analysis api built using LangChain, Groq API, and FastAPI (currently a WIP project)
 
