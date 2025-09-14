@@ -13,9 +13,17 @@ function Header({ className }: { className?: string }) {
         <div className="border-b-2 my-4 flex justify-center" />
         <div className="flex justify-center">
           <div className="shadow-emerald">
-            <img src={viteLogo} className="mx-4 " alt="Vite logo" />
+            <img
+              src={viteLogo}
+              className="mx-4 drop-shadow-[0_0_10px_#10b981]"
+              alt="Vite logo"
+            />
           </div>
-          <img src={reactLogo} className="mx-4 shadow-cyan" alt="React logo" />
+          <img
+            src={reactLogo}
+            className="mx-4 drop-shadow-[0_0_10px_#06b6d4]"
+            alt="React logo"
+          />
         </div>
       </div>
     </>

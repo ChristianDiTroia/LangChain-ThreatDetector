@@ -14,7 +14,7 @@ export default function TextInput({
       <div className="mb-2">
         <label className="font-bold">{label}</label>
       </div>
-      <div className="border-2 rounded-md p-2 h-full max-h-fit">
+      <div className="border-2 rounded-md p-2 h-full max-h-fit bg-gray-900 shadow-xl/50">
         <textarea
           className="outline-none m-auto h-full w-full"
           value={value}
