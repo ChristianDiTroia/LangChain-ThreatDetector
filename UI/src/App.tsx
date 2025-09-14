@@ -1,33 +1,41 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import viteLogo from "./assets/vite.svg";
+import TextInput from "./components/TextInput";
+
+function Header({ className }: { className?: string }) {
+  return (
+    <>
+      <div className={`w-[80vw] m-auto ${className}`}>
+        <h1 className="font-bold italic text-3xl flex justify-center pt-4">
+          Threat Detector
+        </h1>
+        <div className="border-b-2 my-4 flex justify-center" />
+        <div className="flex justify-center">
+          <div className="shadow-emerald">
+            <img src={viteLogo} className="mx-4 " alt="Vite logo" />
+          </div>
+          <img src={reactLogo} className="mx-4 shadow-cyan" alt="React logo" />
+        </div>
+      </div>
+    </>
+  );
+}
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [name, setName] = useState("");
 
   return (
     <>
-      <div className="border-bot mb-4 flex w-full justify-center border-b-2 pb-6">
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Header />
+      <div className="max-w-4xl my-10 mx-auto flex min-h-[50vh] justify-center p-4">
+        <TextInput
+          className="w-full"
+          label="Demo Input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
